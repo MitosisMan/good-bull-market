@@ -42,16 +42,13 @@
         query = document.getElementById('search-input').value.trim(); // Get the query and remove extra spaces
         if (query === "") return; // Don't do anything if the search input is empty
 
-        /* getCompanies(query).then((data) => {
+        getCompanies(query).then((data) => {
           companies = data;
           updateCompanies();
           selectBox(companies[0] || "");
         }).catch(error => {
           console.error("Error fetching companies:", error);
-        }); */
-        companies = ["JNJ", "WMT", "V", "PG", "JPM", "UNH", "MA"];
-        updateCompanies();
-        selectBox(companies[0] || "");
+        });
       }
     }
     window.handleSearchInput = handleSearchInput;
@@ -101,14 +98,11 @@
       const urlParams = new URLSearchParams(window.location.search);
       query = urlParams.get('query');
 
-      /* getCompanies(query).then((data) => {
+      getCompanies(query).then((data) => {
         companies = data;
         updateCompanies();
         selectBox(companies[0] || "");
-      }); */
-      companies = ["AAPL", "MSFT", "GOOGL", "AMZN", "FB", "TSLA", "NVDA"];
-      updateCompanies();
-      selectBox(companies[0] || "");
+      });
     };
   </script>
 </head>
