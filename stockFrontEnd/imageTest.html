@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Screen Box Swap</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script type="module">
+    import cat from './dataTest.js';
+
+    // Function to update the DOM with data
+    function updateBoxContent() {
+      // Find the box elements
+      const titleElement = document.getElementById('box-title');
+      const numberElement = document.getElementById('box-number');
+      const descriptionElement = document.getElementById('box-description');
+      const imageElement = document.getElementById('box-image');
+
+      // Set the content from the 'cat' object
+      titleElement.textContent = cat.name;
+      numberElement.textContent = cat.number;
+      descriptionElement.textContent = cat.description;
+      imageElement.src = cat.imageUrl;
+    }
+
+    // Call the function to update content when the page loads
+    window.onload = updateBoxContent;
+  </script>
+</head>
+<body class="bg-gray-100">
+
+  <div class="flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+      <h2 id="box-title" class="text-xl font-bold"></h2>
+      <p id="box-number" class="text-lg"></p>
+      <p id="box-description"></p>
+      <img id="box-image" alt="Cat Image" class="rounded-lg mt-4"/>
+    </div>
+  </div>
+
+</body>
+</html>

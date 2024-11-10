@@ -1,0 +1,58 @@
+<html>
+    <body>
+        <p>text 1</p>
+        <p>text 2</p>
+        <p>text 3</p>
+        <p>text 4</p>
+        <p>text 5</p>
+        <button id="open-modal">modal open</button>
+        <div id="modal" class="modal-closed">
+            <div class="modal-content">
+                <button id="close-modal">close</button>
+                <p>modal content</p>
+            </div>
+        </div>
+    </body>
+    <script>
+        function openModal() {
+            document.getElementById('modal').classList.remove('modal-closed');
+            document.getElementById('modal').classList.add('modal-open');
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('modal-open');
+            document.getElementById('modal').classList.add('modal-closed');
+        }
+
+        document.getElementById('open-modal').addEventListener('click', openModal);
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+    </script>
+    <style>
+        .modal-closed {
+            display: none;
+        }
+
+        .modal-open {
+            display: block;
+        }
+
+        #modal {
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 50%;
+            height: 50%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</html>

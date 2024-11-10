@@ -1,0 +1,32 @@
+<html>
+    <body>
+        <select name="company" id="company-select">
+            <option value="AAPL">Apple Inc.</option>
+            <option value="MSFT">Microsoft Corporation</option>
+            <option value="GOOGL">Alphabet Inc.</option>
+            <option value="AMZN">Amazon.com Inc.</option>
+            <option value="FB">Facebook Inc.</option>
+            <option value="TSLA">Tesla Inc.</option>
+            <option value="NVDA">Nvidia Corporation</option>
+        </select>
+        <div id="chart">
+            Nothing
+        </div>
+    </body>
+    <script>
+        function generateChart(company) {
+    return `<iframe
+  referrerpolicy="origin"
+  width="100%"
+  height="470"
+  style="background: #FFFFFF;padding: 10px; border: none; border-radius: 5px; box-shadow:0 2px 4px 0 rgba(0,0,0,.2)"
+  src="https://jika.io/embed/area-chart?symbol=${company}&selection=one_year&closeKey=close&boxShadow=true&graphColor=1652f0&textColor=161c2d&backgroundColor=FFFFFF&fontFamily=Nunito"
+></iframe>`
+}
+
+document.getElementById('company-select').addEventListener('change', function() {
+    const company = document.getElementById('company-select').value;
+    document.getElementById('chart').innerHTML = generateChart(company);
+});
+    </script>
+</html>

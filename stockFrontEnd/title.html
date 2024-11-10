@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Good Bull Market</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+  <div class="flex justify-center items-center min-h-screen">
+    <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg p-10">
+      
+      <!-- Title Section -->
+      <div class="text-center mb-6">
+        <h1 class="text-7xl font-bold text-blue-600">Good Bull Market</h1> <!-- Large title taking 1/3 of the screen -->
+      </div>
+      
+      <!-- Description Section -->
+      <div class="text-center mb-8">
+        <p class="text-xl text-gray-700">Write a keyword to see related stocks!</p>
+      </div>
+
+      <!-- Search Bar Section -->
+      <div class="flex justify-center">
+        <div class="relative w-7/10"> <!-- Search bar takes up 70% width -->
+          <input type="text" id="search-input"
+                 class="w-full px-6 py-4 text-3xl border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 onkeydown="handleKeyPress(event)"
+                 onfocus="hideTypingEffect()" 
+                 onblur="showTypingEffect()"
+                 oninput="stopTypingEffect()">
+          <span id="typing-effect" class="absolute inset-y-3 left-6 text-gray-400 text-3xl leading-tight"></span> <!-- Typing effect text -->
+          <button onclick="redirectToSearch()" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 18a8 8 0 1 1 5.292-2.708l4.853 4.853-1.414 1.414-4.853-4.853A7.966 7.966 0 0 1 10 18zm0-14a6 6 0 1 0 4.243 10.243A6 6 0 0 0 10 4z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+    // List of example search terms
+    const exampleWords = ["Pets", "Hotels", "Technology", "Cars", "Food", "Video Games", "Ships", "Airplanes", "Cargo", "Ecommerce", "Manufacturing", "Cats", "Music"];
+    let currentWordIndex = 0;
+    let typingInterval;
+
+    // Function to simulate typing effect for example words
+    function typeWord() {
+      const inputField = document.getElementById("search-input");
+      const typingEffect = document.getElementById("typing-effect");
+      const currentWord = exampleWords[currentWordIndex];
+      let charIndex = 0;
+
+      // Clear previous typing effect
+      typingEffect.textContent = "";
+      
+      typingInterval = setInterval(() => {
+        typingEffect.textContent += currentWord.charAt(charIndex);
+        charIndex++;
+
+        // Once the word is fully typed, move to the next word
+        if (charIndex === currentWord.length) {
+          clearInterval(typingInterval);
+          currentWordIndex = (currentWordIndex + 1) % exampleWords.length; // Cycle through the words
+          setTimeout(typeWord, 1000); // Delay before typing the next word
+        }
+      }, 375); // Typing speed (150ms per character)
+    }
+
+    // Start typing when the page loads
+    window.onload = typeWord;
+
+    function hideTypingEffect() {
+      const typingEffect = document.getElementById("typing-effect");
+      const inputField = document.getElementById("search-input");
+
+      // Stop typing effect if the input field is focused
+      clearInterval(typingInterval);
+      typingEffect.style.display = "none"; // Hide the typing effect
+      isTyping = true; // Mark that the user is typing
+    }
+
+    // Function to restart the typing effect if the input field is empty and user clicks out
+    function showTypingEffect() {
+      const typingEffect = document.getElementById("typing-effect");
+      const inputField = document.getElementById("search-input");
+
+      // Only restart the typing effect if the input is empty
+      if (inputField.value === "") {
+        typingEffect.style.display = "block"; // Show the typing effect
+        typingEffect.textContent = ""; // Reset typing effect text
+        currentWordIndex = 0; // Start from the first word
+        typeWord(); // Restart typing
+      } else {
+        typingEffect.style.display = "none"; // Hide typing effect if there's text in the input
+      }
+    }
+
+    // Function to stop typing effect when the user starts typing
+    function stopTypingEffect() {
+      clearInterval(typingInterval); // Stop the typing effect immediately
+      const typingEffect = document.getElementById("typing-effect");
+      typingEffect.style.display = "none"; // Hide the typing effect text
+      isTyping = true; // Mark that the user is typing
+    }
+
+    // Function to handle search when pressing enter
+    function handleKeyPress(event) {
+      if (event.key === "Enter") {
+        redirectToSearch();
+      }
+    }
+
+    function redirectToSearch() {
+      const query = document.getElementById("search-input").value;
+      window.location.href = `info.html?query=${query}`;
+    }
+  </script>
+
+</body>
+</html>
